@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Student</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+</head>
+<body>
+<h3>Student Details</h3>
+
+<form method="post">
+    <div id="inputdiv">
+        <pre>ID : <input id="studentID" type="text"/>     Standard   : <input id="studentStandard" type="number"/>       Name : <input id="studentName" type="text"/></pre>
+
+    </div>
+    <br><button name="button" id="button" type="button">Submit</button></br>
+    <br><button id="addmore" type="button">Add more</button></br>
+</form>
+
+<script>
+    // var studentno=0;
+    // $("#addmore").click(function () {
+    //     studentno++;
+    //     alert(studentno+1);
+    //     $('#inputdiv').append('<pre>ID : <input id="studentID'+studentno+'" type="text"/>     Standard   : <input id="studentStandard'+studentno+'" type="number"/>       Name : <input id="studentName'+studentno+'" type="text"/></pre>')
+    // })
+    $(document).ready(function() {
+        $("#button").click(function() {
+                // var i=0;
+                // alert('#studentID[0]');
+            var studentID=$('#studentID').val();
+            var studentStandard=$('#studentStandard').val();
+            var studentName=$('#studentName').val();
+
+            var studentDetails = {
+                'studentName':studentName,
+                'studentStandard':studentStandard,
+                'studentID':studentID
+            };
+            var sdJson=JSON.stringify(studentDetails);
+            alert(sdJson);
+            $.ajax({
+                type : "POST",
+                url : "http://localhost:8080/addstudent",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                data : sdJson,
+                success : function(data) {
+                    alert("Successfully Added Student, press ok to view all student details..");
+                    window.location.replace("http://localhost:8080/studentdetails");
+                },
+                error : function(data) {
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
