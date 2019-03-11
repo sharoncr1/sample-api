@@ -5,6 +5,9 @@ All in one UI - http://localhost:8080/studentdetailstable
 
 (implemented using jquery,AJAX to make requests to server)
 
+note : 
+1. There might be issues/errors regarding the mysql user password. Resolve the errors by editing the password in following        files : application.properties, application-integrationtest.properties and MainClass.java
+2. There will be no data and so no output in the initial run. First insert some rows first through either UI or direct POST        request.
 
 type - urls - data - use
 
