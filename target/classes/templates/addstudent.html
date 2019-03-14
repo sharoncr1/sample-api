@@ -11,7 +11,7 @@
 
 <form method="post">
     <div id="inputdiv">
-        <pre>ID : <input id="studentID" type="text"/>     Standard   : <input id="studentStandard" type="number"/>       Name : <input id="studentName" type="text"/></pre>
+        <pre>ID : <input id="id" type="text"/>     Standard   : <input id="standard" type="number"/>       Name : <input id="name" type="text"/></pre>
 
     </div>
     <br><button name="button" id="button" type="button">Submit</button></br>
@@ -23,20 +23,20 @@
     // $("#addmore").click(function () {
     //     studentno++;
     //     alert(studentno+1);
-    //     $('#inputdiv').append('<pre>ID : <input id="studentID'+studentno+'" type="text"/>     Standard   : <input id="studentStandard'+studentno+'" type="number"/>       Name : <input id="studentName'+studentno+'" type="text"/></pre>')
+    //     $('#inputdiv').append('<pre>ID : <input id="id'+studentno+'" type="text"/>     Standard   : <input id="standard'+studentno+'" type="number"/>       Name : <input id="name'+studentno+'" type="text"/></pre>')
     // })
     $(document).ready(function() {
         $("#button").click(function() {
                 // var i=0;
-                // alert('#studentID[0]');
-            var studentID=$('#studentID').val();
-            var studentStandard=$('#studentStandard').val();
-            var studentName=$('#studentName').val();
+                // alert('#id[0]');
+            var id=$('#id').val();
+            var standard=$('#standard').val();
+            var name=$('#name').val();
 
             var studentDetails = {
-                'studentName':studentName,
-                'studentStandard':studentStandard,
-                'studentID':studentID
+                'name':name,
+                'standard':standard,
+                'id':id
             };
             var sdJson=JSON.stringify(studentDetails);
             alert(sdJson);

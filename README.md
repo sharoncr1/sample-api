@@ -18,13 +18,13 @@ GET - localhost:8080/studentdetails/st003 - noData - to retrieve particular row
 POST - localhost:8080/addstudent?content-type=application/json - adding new row
 
 {
-    "studentName": "name6",
-    "studentStandard": 5,
-    "studentID": "st005"
+    "name": "name6",
+    "standard": 5,
+    "id": "st005"
 }
 
 PUT - localhost:8080/updatestudent/st002 - updating a row
 
-{ "studentName": "name8", "studentStandard": 8, "studentID": "st002" }
+{ "name": "name8", "standard": 8, "id": "st002" }
 
 DELETE - localhost:8080/deletestudentdetails/st001 - noData - deleteing a row

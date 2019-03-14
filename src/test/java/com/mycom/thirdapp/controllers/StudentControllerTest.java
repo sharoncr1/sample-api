@@ -1,6 +1,8 @@
 package com.mycom.thirdapp.controllers;
 
+import com.mycom.thirdapp.models.StudentDetailsService;
 import com.mycom.thirdapp.student.StudentDetails;
+import com.mycom.thirdapp.student.StudentRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,19 +15,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import com.mycom.thirdapp.models.StudentDetailsService;
-import com.mycom.thirdapp.student.StudentRepository;
-
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+
+
+//tests that using the mocked databases instances
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -71,14 +69,14 @@ public class StudentControllerTest {
     public void getStudentDetails() {
         when(studentController.getStudentDetails("st001")).thenReturn(
             new StudentDetails("name1",6,"st001"));
-        Assert.assertEquals("name1",studentController.getStudentDetails("st001").getStudentName());
+        Assert.assertEquals("name1",studentController.getStudentDetails("st001").getName());
     }
 
 
 
     @Test
     public void deleteStudentDetails() {
-        StudentDetails student=new StudentDetails("name1",6,"st001");
+//        StudentDetails student=new StudentDetails("name1",6,"st001");
         studentController.deleteStudentDetails("st001");
         verify(studentRepository,times(1)).delete("st001");
     }

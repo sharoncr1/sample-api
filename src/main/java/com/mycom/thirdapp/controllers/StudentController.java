@@ -1,6 +1,8 @@
 package com.mycom.thirdapp.controllers;
 
 import com.mycom.thirdapp.student.StudentDetails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.mycom.thirdapp.models.StudentDetailsService;
@@ -9,6 +11,8 @@ import java.util.List;
 
 @RestController
 public class StudentController {
+
+    final Logger logger= LoggerFactory.getLogger(StudentController.class);
 
     @Autowired
     private StudentDetailsService studentDetailsService;
@@ -20,12 +24,20 @@ public class StudentController {
 
     @RequestMapping("/studentdetails")
     public List<StudentDetails> getAllStudentDetails(){
+        logger.info("Handling /studentdetails end point");
       return studentDetailsService.getAllStudentDetails();
     }
 
     @RequestMapping("/studentdetails/{studentID}")
     public StudentDetails getStudentDetails(@PathVariable String studentID){
-        return studentDetailsService.getStudentDetails(studentID);
+        StudentDetails searchResult=studentDetailsService.getStudentDetails(studentID);
+        if(searchResult.getId().isEmpty()){
+            logger.info("No search results");
+        }
+        else{
+            logger.info("Returned record with id {}",searchResult.getId());
+        }
+        return searchResult;
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/addstudent")
@@ -44,7 +56,9 @@ public class StudentController {
     }
     @RequestMapping(method = RequestMethod.GET,value = "/filterstudentsbystandard/{starting}/{ending}")
     public List<StudentDetails> filterStudentsByStandard(@PathVariable int starting,@PathVariable int ending){
-        return studentDetailsService.filterStudentsByStandard(starting,ending);
+        List<StudentDetails> fileteredResult=studentDetailsService.filterStudentsByStandard(starting,ending);
+        logger.info("Number of records Returned to the ui :\n"+fileteredResult.size());
+        return fileteredResult;
     }
 
 }

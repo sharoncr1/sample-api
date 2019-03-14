@@ -1,47 +1,55 @@
 package com.mycom.thirdapp.student;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="student_details")
 public class StudentDetails {
-    private String studentName;
-    private int studentStandard;
+    @Column(name="name")
+    private String name;
+
+    @Column(name="standard")
+    private int standard;
+
+    @Column(name="id")
     @Id
-    private String studentID;
+    private String id;
 
 
-    public StudentDetails(String studentName, int studentStandard, String studentID) {
-        this.studentName = studentName;
-        this.studentStandard = studentStandard;
-        this.studentID = studentID;
+    public StudentDetails(String name, int standard, String id) {
+        this.name = name;
+        this.standard = standard;
+        this.id = id;
     }
 
     public StudentDetails() {
 
     }
 
-    public String getStudentName() {
-        return studentName;
+    public String getName() {
+        return name;
     }
 
-    public int getStudentStandard() {
-        return studentStandard;
+    public int getStandard() {
+        return standard;
     }
 
-    public String getStudentID() {
-        return studentID;
+    public String getId() {
+        return id;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setStudentStandard(int studentStandard) {
-        this.studentStandard = studentStandard;
+    public void setStandard(int standard) {
+        this.standard = standard;
     }
 
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+    public void setId(String id) {
+        this.id = id;
     }
 }
