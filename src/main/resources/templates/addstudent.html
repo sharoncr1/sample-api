@@ -1,62 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Add Student</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-</head>
-<body>
-<h3>Student Details</h3>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Add Student</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+        </script>
+    </head>
+    <body>
+        <h3>Student Details</h3>
 
-<form method="post">
-    <div id="inputdiv">
-        <pre>ID : <input id="id" type="text"/>     Standard   : <input id="standard" type="number"/>       Name : <input id="name" type="text"/></pre>
+        <form method="post">
+            <div id="inputdiv">
+                <pre>ID : <input id="id" type="text"/>     Standard   : <input id="standard" type="number"/>       Name : <input id="name" type="text"/></pre>
 
-    </div>
-    <br><button name="button" id="button" type="button">Submit</button></br>
-    <br><button id="addmore" type="button">Add more</button></br>
-</form>
+            </div>
+            <br><button name="button" id="button" type="button">Submit</button></br>
+        </form>
 
-<script>
-    // var studentno=0;
-    // $("#addmore").click(function () {
-    //     studentno++;
-    //     alert(studentno+1);
-    //     $('#inputdiv').append('<pre>ID : <input id="id'+studentno+'" type="text"/>     Standard   : <input id="standard'+studentno+'" type="number"/>       Name : <input id="name'+studentno+'" type="text"/></pre>')
-    // })
-    $(document).ready(function() {
-        $("#button").click(function() {
-                // var i=0;
-                // alert('#id[0]');
-            var id=$('#id').val();
-            var standard=$('#standard').val();
-            var name=$('#name').val();
+    <script>
+        $(document).ready(function() {
+            $("#button").click(function() {
+                    // var i=0;
+                    // alert('#id[0]');
+                var id=$('#id').val();
+                var standard=$('#standard').val();
+                var name=$('#name').val();
 
-            var studentDetails = {
-                'name':name,
-                'standard':standard,
-                'id':id
-            };
-            var sdJson=JSON.stringify(studentDetails);
-            alert(sdJson);
-            $.ajax({
-                type : "POST",
-                url : "http://localhost:8080/addstudent",
-                headers : {
-                    "Content-Type" : "application/json"
-                },
-                data : sdJson,
-                success : function(data) {
-                    alert("Successfully Added Student, press ok to view all student details..");
-                    window.location.replace("http://localhost:8080/studentdetails");
-                },
-                error : function(data) {
-                }
+                var studentDetails = {
+                    'name':name,
+                    'standard':standard,
+                    'id':id
+                };
+                var sdJson=JSON.stringify(studentDetails);
+                alert(sdJson);
+                $.ajax({
+                    type : "POST",
+                    url : "http://localhost:8080/addstudent",
+                    headers : {
+                        "Content-Type" : "application/json"
+                    },
+                    data : sdJson,
+                    success : function(data) {
+                        alert("Successfully Added Student, press ok to view all student details..");
+                        window.location.replace("http://localhost:8080/studentdetails");
+                    },
+                    error : function(data) {
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 
-</body>
+    </body>
 </html>
