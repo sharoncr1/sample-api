@@ -31,11 +31,11 @@ public class StudentController {
     @RequestMapping("/studentdetails/{studentID}")
     public StudentDetails getStudentDetails(@PathVariable String studentID){
         StudentDetails searchResult=studentDetailsService.getStudentDetails(studentID);
-        if(searchResult.getId().isEmpty()){
-            logger.info("No search results");
+        if(searchResult!=null) {
+            logger.info("Returning record with id {}", searchResult.getId());
         }
-        else{
-            logger.info("Returned record with id {}",searchResult.getId());
+        else {
+            logger.warn("No Search Results");
         }
         return searchResult;
     }
@@ -56,9 +56,9 @@ public class StudentController {
     }
     @RequestMapping(method = RequestMethod.GET,value = "/filterstudentsbystandard/{starting}/{ending}")
     public List<StudentDetails> filterStudentsByStandard(@PathVariable int starting,@PathVariable int ending){
-        List<StudentDetails> fileteredResult=studentDetailsService.filterStudentsByStandard(starting,ending);
-        logger.info("Number of records Returned to the ui :\n"+fileteredResult.size());
-        return fileteredResult;
+        List<StudentDetails> filteredResult=studentDetailsService.filterStudentsByStandard(starting,ending);
+        logger.info("Number of records Returned to the ui :\n"+filteredResult.size());
+        return filteredResult;
     }
 
 }

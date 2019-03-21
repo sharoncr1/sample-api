@@ -1,157 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Student Details</title>
-    <style>
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .hidden{display:none;}
-        .range{width: 45px;}
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/javasc.js"></script>
-</head>
-<body>
-    <table id="allresults" class="hidden" cellpadding="15px" border="1px">
-        <tr>
-            <th>StudentID</th>
-            <th>StudentName</th>
-            <th>StudentStandard</th>
-        </tr>
-    </table>
-        <div id="infodiv"></div>
-
-
-    <pre>
-        <br> </br>
-        <b>From : </b> <input id="starting" type="number" class="range"/>    <b>To : </b> <input id="ending" type="number" class="range"/>  <button id="filter" >Filter By Standard</button>
-        <br> </br>
-        <b>Student ID   :  </b><input name="id" id="id" type="text" /> <span id="updatediv" class="hidden">  <b>Name   :  </b><input id="name" type="text" />   <b>Standard   :  </b><input id="standard" type="text" />  <button id="update1" >update/add</button></span>
-
-        <button id="search" >Search</button>         <button id="delete" >delete</button>        <button id="update" type="button">update/add</button>
-
-    </pre>
-
-    <table id="searchresults" class="hidden" cellpadding="15px" border="1px">
-        <tr>
-            <th>StudentID</th>
-            <th>StudentName</th>
-            <th>StudentStandard</th>
-        </tr>
-    </table>
-    <script>
-
-
-        $("#search").click(function() {
-
-            var studentID=$('#id').val();
-            $.ajax({
-                type : "GET",
-                url : 'http://localhost:8080/studentdetails/'+studentID,
-                headers : {
-                    "Content-Type" : "application/json"
-                },
-                success : function(data) {
-                    var jsonArray = [];
-                    jsonArray.push(data);
-                    console.log(data);
-                    populateTable('searchresults',jsonArray);
-
-                },
-                error : function(data) {
-                    alert('no results');
-                }
-            });
-        });
-
-        $("#delete").click(function() {
-            var studentID=$('#id').val();
-            $.ajax({
-                type : "DELETE",
-                url : "http://localhost:8080/deletestudent/"+studentID,
-                headers : {
-                    "Content-Type" : "application/json"
-                },
-                success : function(data) {
-                    alert("Successfully Deleted, press ok to view all student details..");
-                    location.reload();
-                },
-                error : function(data) {
-                }
-            });
-        });
-
-        $("#update").click(function() {
-            $("#update").hide();
-            $("#updatediv").removeClass("hidden");
-        });
-
-        $("#filter").click(function () {
-            var starting=parseInt($('#starting').val());
-            var ending=parseInt($('#ending').val());
-            var temp=0;
-            if(starting>ending){
-                temp=starting; starting=ending; ending=temp;
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Student Details</title>
+        <style>
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
             }
-            $.ajax({
-                type : "GET",
-                url : "http://localhost:8080/filterstudentsbystandard/"+starting+"/"+ending,
-                headers : {
-                    "Content-Type" : "application/json"
-                },
-                success : function(data) {
-                    populateTable('searchresults',data);
-                },
-                error : function(data) {
-                }
-            });
+            .hidden{display:none;}
+            .range{width: 45px;}
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/javasc.js"></script>
+    </head>
+    <body>
+        <table id="allresults" class="hidden" cellpadding="15px" border="1px">
+            <tr>
+                <th>StudentID</th>
+                <th>StudentName</th>
+                <th>StudentStandard</th>
+            </tr>
+        </table>
+            <div id="infodiv"></div>
 
-        })
 
-        $("#update1").click(function() {
+        <pre>
+            <br> </br>
+            <b>From : </b> <input id="starting" type="number" class="range"/>    <b>To : </b> <input id="ending" type="number" class="range"/>  <button id="filter" >Filter By Standard</button>
+            <br> </br>
+            <b>Student ID   :  </b><input name="id" id="id" type="text" /> <span id="updatediv" class="hidden">  <b>Name   :  </b><input id="name" type="text" />   <b>Standard   :  </b><input id="standard" type="text" />  <button id="update1" >update/add</button></span>
 
-            var err=false;
-            $('input[type="text"]').each(function() {
-                if ($.trim($(this).val()) == '') {
-                    err=true;
-                }
-            });
-            if(!err) {
-                var studentID = $('#id').val();
-                var studentStandard = $('#standard').val();
-                var studentName = $('#name').val();
+            <button id="search" >Search</button>         <button id="delete" >delete</button>        <button id="update" type="button">update/add</button>
 
-                var studentDetails = {
-                    'name': studentName,
-                    'standard': studentStandard,
-                    'id': studentID
-                };
-                var sdJson = JSON.stringify(studentDetails);
-                alert(sdJson);
-                $.ajax({
-                    type: "PUT",
-                    url: "http://localhost:8080/updatestudent/" + studentID,
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    data: sdJson,
-                    success: function (data) {
-                        alert("Successfully updated, press ok to view all student details..");
-                        window.location.replace("http://localhost:8080/studentdetailstable");
-                    },
-                    error: function (data) {
-                    }
-                });
-            }
-            else {
-                alert("Please fill all fields");
-            }
-        });
+        </pre>
 
-    </script>
-</body>
+        <table id="searchresults" class="hidden" cellpadding="15px" border="1px">
+            <tr>
+                <th>StudentID</th>
+                <th>StudentName</th>
+                <th>StudentStandard</th>
+            </tr>
+        </table>
+        <script>
+        </script>
+    </body>
 </html>

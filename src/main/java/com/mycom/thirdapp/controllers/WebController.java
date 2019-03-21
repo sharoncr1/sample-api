@@ -16,10 +16,6 @@ public class WebController {
         return "index";
     }
 
-    @RequestMapping(value = "/addstudentform")
-    public String addstudent() {
-        return "addstudent";
-    }
     @RequestMapping(value = "/studentdetailstable")
     public String studentDetailsTable() {
         return "studentdetailstable";

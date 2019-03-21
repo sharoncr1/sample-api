@@ -1,7 +1,10 @@
 package com.mycom.thirdapp.models;
 
+import com.mycom.thirdapp.controllers.StudentController;
 import com.mycom.thirdapp.student.StudentDetails;
 import com.mycom.thirdapp.student.StudentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ public class StudentDetailsService {
 
     @Autowired
     private StudentRepository studentRepository;
+    final Logger logger= LoggerFactory.getLogger(StudentDetailsService.class);
 
     public List<StudentDetails> getAllStudentDetails(){
         List<StudentDetails> studentDetails = new ArrayList<>();
