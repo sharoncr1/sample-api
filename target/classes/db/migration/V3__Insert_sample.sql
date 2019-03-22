@@ -1,0 +1,1 @@
+insert into student values ('tstid','tstname',10);

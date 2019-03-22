@@ -1,11 +1,11 @@
 package com.mycom.thirdapp.controllers;
 
-import com.mycom.thirdapp.student.StudentDetails;
+import com.mycom.thirdapp.db.models.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.mycom.thirdapp.models.StudentDetailsService;
+import com.mycom.thirdapp.services.StudentService;
 
 import java.util.List;
 
@@ -15,22 +15,22 @@ public class StudentController {
     final Logger logger= LoggerFactory.getLogger(StudentController.class);
 
     @Autowired
-    private StudentDetailsService studentDetailsService;
+    private StudentService studentService;
 
     @RequestMapping("/hello")
     public String welcome(){
         return "Hello World";
     }
 
-    @RequestMapping("/studentdetails")
-    public List<StudentDetails> getAllStudentDetails(){
-        logger.info("Handling /studentdetails end point");
-      return studentDetailsService.getAllStudentDetails();
+    @RequestMapping("/getall")
+    public List<Student> getAll(){
+        logger.info("Handling /getall end point");
+      return studentService.findAll();
     }
 
-    @RequestMapping("/studentdetails/{studentID}")
-    public StudentDetails getStudentDetails(@PathVariable String studentID){
-        StudentDetails searchResult=studentDetailsService.getStudentDetails(studentID);
+    @RequestMapping("/get/{studentID}")
+    public Student get(@PathVariable String studentID){
+        Student searchResult= studentService.find(studentID);
         if(searchResult!=null) {
             logger.info("Returning record with id {}", searchResult.getId());
         }
@@ -40,23 +40,24 @@ public class StudentController {
         return searchResult;
     }
 
-    @RequestMapping(method = RequestMethod.POST,value = "/addstudent")
-    public void addStudentDetails(@RequestBody StudentDetails studentDetails){
-        studentDetailsService.addStudentDetails(studentDetails);
+    @RequestMapping(method = RequestMethod.POST,value = "/add")
+    public void add(@RequestBody Student student){
+        studentService.add(student);
     }
 
-    @RequestMapping(method = RequestMethod.PUT,value = "/updatestudent/{studentID}")
-    public void updateStudentDetails(@RequestBody StudentDetails studentDetails, @PathVariable String studentID){
-        studentDetailsService.updateStudentDetails(studentDetails,studentID);
+    @RequestMapping(method = RequestMethod.PUT,value = "/update/{studentID}")
+    public void update(@RequestBody Student student, @PathVariable String studentID){
+        studentService.update(student,studentID);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE,value = "/deletestudent/{studentID}")
-    public void deleteStudentDetails(@PathVariable String studentID){
-        studentDetailsService.deleteStudentDetails(studentID);
+    @RequestMapping(method = RequestMethod.DELETE,value = "/delete/{studentID}")
+    public void delete(@PathVariable String studentID){
+        studentService.delete(studentID);
     }
-    @RequestMapping(method = RequestMethod.GET,value = "/filterstudentsbystandard/{starting}/{ending}")
-    public List<StudentDetails> filterStudentsByStandard(@PathVariable int starting,@PathVariable int ending){
-        List<StudentDetails> filteredResult=studentDetailsService.filterStudentsByStandard(starting,ending);
+
+    @RequestMapping(method = RequestMethod.GET,value = "/get/student/{start}/{end}")
+    public List<Student> filterByStandard(@PathVariable int start, @PathVariable int end){
+        List<Student> filteredResult= studentService.filterByStandard(start,end);
         logger.info("Number of records Returned to the ui :\n"+filteredResult.size());
         return filteredResult;
     }

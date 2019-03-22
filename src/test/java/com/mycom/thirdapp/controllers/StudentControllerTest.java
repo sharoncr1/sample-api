@@ -1,8 +1,8 @@
 package com.mycom.thirdapp.controllers;
 
-import com.mycom.thirdapp.models.StudentDetailsService;
-import com.mycom.thirdapp.student.StudentDetails;
-import com.mycom.thirdapp.student.StudentRepository;
+import com.mycom.thirdapp.db.models.Student;
+import com.mycom.thirdapp.services.StudentService;
+import com.mycom.thirdapp.db.repositories.StudentRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class StudentControllerTest {
     StudentRepository studentRepository;
 
     @Autowired
-    StudentDetailsService studentDetailsService;
+    StudentService studentService;
 
     @Autowired
     StudentController studentController;
@@ -58,26 +58,25 @@ public class StudentControllerTest {
     @Test
     public void getAllStudentsTest(){
         when(studentRepository.findAll()).thenReturn(Stream.of
-                (new StudentDetails("name1",1,"st001"),
-                new StudentDetails("name2",2,"st002")).collect(Collectors.toList()));
-        assertEquals(2,studentController.getAllStudentDetails().size());
+                (new Student("name1",1,"st001"),
+                new Student("name2",2,"st002")).collect(Collectors.toList()));
+        assertEquals(2,studentController.getAll().size());
 
     }
 
 
     @Test
     public void getStudentDetails() {
-        when(studentController.getStudentDetails("st001")).thenReturn(
-            new StudentDetails("name1",6,"st001"));
-        Assert.assertEquals("name1",studentController.getStudentDetails("st001").getName());
+        when(studentController.get("st001")).thenReturn(
+            new Student("name1",6,"st001"));
+        Assert.assertEquals("name1",studentController.get("st001").getName());
     }
-
 
 
     @Test
     public void deleteStudentDetails() {
-//        StudentDetails student=new StudentDetails("name1",6,"st001");
-        studentController.deleteStudentDetails("st001");
+//        Student db=new Student("name1",6,"st001");
+        studentController.delete("st001");
         verify(studentRepository,times(1)).delete("st001");
     }
 }

@@ -2,31 +2,31 @@
 $(document).ready(function() {
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/studentdetails',
+        url: 'http://localhost:8080/getall',
         success: function(data){
             if(data){
                 populateTable('allresults',data);
             }
-            $("#infodiv").append("(This table is populated using the json file returned by the url 'http://localhost:8080/studentdetails')")
+            $("#infodiv").append("(This table is populated using the json file returned by the url 'http://localhost:8080/getall')")
         },
         error: function(jqXHR, textStatus, errorThrown){
             alert('error: ' + textStatus + ': ' + errorThrown);
         }
     });
 
-
-
     $("#search").click(function() {
-
-        var studentID=$('#id').val();
+        var id=$('#id').val();
         $.ajax({
             type : "GET",
-            url : 'http://localhost:8080/studentdetails/'+studentID,
+            url : 'http://localhost:8080/get/'+id,
             headers : {
                 "Content-Type" : "application/json"
             },
             success : function(data) {
                 var jsonArray = [];
+                if(data.toString()==''){
+                    alert("No results")
+                }
                 jsonArray.push(data);
                 console.log(data);
                 populateTable('searchresults',jsonArray);
@@ -39,16 +39,33 @@ $(document).ready(function() {
     });
 
     $("#delete").click(function() {
-        var studentID=$('#id').val();
+        var id=$('#id').val();
         $.ajax({
-            type : "DELETE",
-            url : "http://localhost:8080/deletestudent/"+studentID,
+            type : "GET",
+            url : 'http://localhost:8080/get/'+id,
             headers : {
                 "Content-Type" : "application/json"
             },
             success : function(data) {
-                alert("Successfully Deleted, press ok to view all student details..");
-                location.reload();
+                var jsonArray = [];
+                if(data.toString()==''){
+                    alert("No results")
+                }
+                else {
+                    $.ajax({
+                        type : "DELETE",
+                        url : "http://localhost:8080/delete/"+id,
+                        headers : {
+                            "Content-Type" : "application/json"
+                        },
+                        success : function(data) {
+                            alert("Successfully Deleted, press ok to view all db details..");
+                            location.reload();
+                        },
+                        error : function(data) {
+                        }
+                    });
+                }
             },
             error : function(data) {
             }
@@ -61,15 +78,15 @@ $(document).ready(function() {
     });
 
     $("#filter").click(function () {
-        var starting=parseInt($('#starting').val());
-        var ending=parseInt($('#ending').val());
+        var start=parseInt($('#starting').val());
+        var end=parseInt($('#ending').val());
         var temp=0;
-        if(starting>ending){
-            temp=starting; starting=ending; ending=temp;
+        if(start>end){
+            temp=start; start=end; end=temp;
         }
         $.ajax({
             type : "GET",
-            url : "http://localhost:8080/filterstudentsbystandard/"+starting+"/"+ending,
+            url : "http://localhost:8080/get/student    /"+start+"/"+end,
             headers : {
                 "Content-Type" : "application/json"
             },
@@ -91,27 +108,27 @@ $(document).ready(function() {
             }
         });
         if(!err) {
-            var studentID = $('#id').val();
-            var studentStandard = $('#standard').val();
-            var studentName = $('#name').val();
+            var id= $('#id').val();
+            var standard = $('#standard').val();
+            var name = $('#name').val();
 
-            var studentDetails = {
-                'name': studentName,
-                'standard': studentStandard,
-                'id': studentID
+            var student = {
+                'name': name,
+                'standard': standard,
+                'id': id
             };
-            var sdJson = JSON.stringify(studentDetails);
+            var sdJson = JSON.stringify(student);
             alert(sdJson);
             $.ajax({
                 type: "PUT",
-                url: "http://localhost:8080/updatestudent/" + studentID,
+                url: "http://localhost:8080/update/" + id,
                 headers: {
                     "Content-Type": "application/json"
                 },
                 data: sdJson,
                 success: function (data) {
-                    alert("Successfully updated, press ok to view all student details..");
-                    window.location.replace("http://localhost:8080/studentdetailstable");
+                    alert("Successfully updated, press ok to view all db details..");
+                    window.location.replace("http://localhost:8080/home");
                 },
                 error: function (data) {
                 }

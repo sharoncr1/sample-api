@@ -1,8 +1,8 @@
 package com.mycom.thirdapp.controllers;
 
-import com.mycom.thirdapp.models.StudentDetailsService;
-import com.mycom.thirdapp.student.StudentDetails;
-import com.mycom.thirdapp.student.StudentRepository;
+import com.mycom.thirdapp.db.models.Student;
+import com.mycom.thirdapp.services.StudentService;
+import com.mycom.thirdapp.db.repositories.StudentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,52 +18,50 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class StudentControllerTestUsingH2 {
 
     @Autowired
-    StudentDetailsService studentDetailsService;
+    StudentService studentService;
 
     @Autowired
     StudentRepository studentRepository;
 
-
-
-    private StudentDetails getTestStudent(){
-        StudentDetails studentDetails=new StudentDetails("name",8,"st001");
-        return studentDetails;
+    private Student getTestStudent(){
+        Student student =new Student("name",8,"st001");
+        return student;
     }
 
     @Test
-    public void addStudentAndgetStudentDetailsByIDTest(){
-        StudentDetails testDetails=getTestStudent();
-        studentDetailsService.addStudentDetails(testDetails);
-        StudentDetails getFromDB=studentDetailsService.getStudentDetails("st001");
+    public void addAndgetTest(){
+        Student testDetails=getTestStudent();
+        studentService.add(testDetails);
+        Student getFromDB= studentService.find("st001");
         assert(getFromDB.getName()).equals("name");
     }
     @Test
-    public void getAllstudentDetailsTest(){
-        List<StudentDetails> studentDetailsList;
-        StudentDetails testDetails=getTestStudent();
-        studentDetailsService.addStudentDetails(testDetails);
-        studentDetailsList=studentDetailsService.getAllStudentDetails();
-        assertThat(studentDetailsList.size()).isEqualTo(1);
+    public void getAllTest(){
+        List<Student> studentList;
+        Student testDetails=getTestStudent();
+        studentService.add(testDetails);
+        studentList = studentService.findAll();
+        assertThat(studentList.size()).isEqualTo(1);
     }
     @Test
-    public void deleteStudentTest(){
-        StudentDetails testDetails=getTestStudent();
-        studentDetailsService.addStudentDetails(testDetails);
+    public void deleteTest(){
+        Student testDetails=getTestStudent();
+        studentService.add(testDetails);
 //        deleting the record with id st001
-        studentDetailsService.deleteStudentDetails("st001");
+        studentService.delete("st001");
 //        tyring to fetch record with id st001
-        StudentDetails getFromDB=studentDetailsService.getStudentDetails("st001");
+        Student getFromDB= studentService.find("st001");
         assertThat(getFromDB).isNull();
     }
     @Test
-    public void updateStudentTest(){
-        StudentDetails testDetails=getTestStudent();
-        studentDetailsService.addStudentDetails(testDetails);
+    public void updateTest(){
+        Student testDetails=getTestStudent();
+        studentService.add(testDetails);
 //        updating name in the record with id st001
-        studentDetailsService.updateStudentDetails(new StudentDetails("newname",8,"st001"),"st001");
+        studentService.update(new Student("newname",8,"st001"),"st001");
 //        fetching the name in the record with id st001 and making sure it's newname
 
-        StudentDetails resultDetails=studentDetailsService.getStudentDetails("st001");
+        Student resultDetails= studentService.find("st001");
         assertThat(resultDetails.getName()).isEqualTo("newname");
     }
 

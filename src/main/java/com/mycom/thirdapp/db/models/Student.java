@@ -1,31 +1,39 @@
-package com.mycom.thirdapp.student;
+package com.mycom.thirdapp.db.models;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="student_details")
-public class StudentDetails {
+@Table(name="student")
+public class Student {
+
+    @NotBlank
+    @Size(max = 50)
     @Column(name="name")
     private String name;
 
+    @NotBlank
     @Column(name="standard")
     private int standard;
 
-    @Column(name="id")
     @Id
+    @Column(name="id")
+    @Size(max = 5)
     private String id;
 
 
-    public StudentDetails(String name, int standard, String id) {
+    public Student(String name, int standard, String id) {
         this.name = name;
         this.standard = standard;
         this.id = id;
     }
 
-    public StudentDetails() {
+    public Student() {
 
     }
 
