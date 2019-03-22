@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d256905c-9657-4c32-b5af-79c77b85ef83" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycom/thirdapp/db/models/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycom/thirdapp/db/models/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/javasc.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/javasc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/thirdproject.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mycom/thirdapp/MainClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycom/thirdapp/MainClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mycom/thirdapp/controllers/StudentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycom/thirdapp/controllers/StudentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/migration/V3__Insert_sample.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/javasc.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/javasc.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -120,8 +113,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mycom/thirdapp/db/models/Student.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="396">
+              <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -355,7 +348,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553250045862" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553250344048" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -523,7 +516,7 @@
       <workItem from="1552301173590" duration="1175000" />
       <workItem from="1553167256701" duration="6219000" />
       <workItem from="1553229927105" duration="6759000" />
-      <workItem from="1553249537808" duration="604000" />
+      <workItem from="1553249537808" duration="890000" />
     </task>
     <servers />
   </component>
@@ -560,7 +553,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51924000" />
+    <option name="totallyTimeSpent" value="52210000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="69" y="-5" width="1851" height="1085" extended-state="6" />
@@ -576,7 +569,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32893288" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35643566" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.35643566" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -739,8 +732,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mycom/thirdapp/db/models/Student.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="396">
+          <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
