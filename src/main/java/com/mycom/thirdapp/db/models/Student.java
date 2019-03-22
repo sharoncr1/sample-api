@@ -12,12 +12,10 @@ import javax.validation.constraints.Size;
 @Table(name="student")
 public class Student {
 
-    @NotBlank
     @Size(max = 50)
     @Column(name="name")
     private String name;
 
-    @NotBlank
     @Column(name="standard")
     private int standard;
 

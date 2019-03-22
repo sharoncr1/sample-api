@@ -86,7 +86,7 @@ $(document).ready(function() {
         }
         $.ajax({
             type : "GET",
-            url : "http://localhost:8080/get/student    /"+start+"/"+end,
+            url : "http://localhost:8080/get/student/"+start+"/"+end,
             headers : {
                 "Content-Type" : "application/json"
             },
