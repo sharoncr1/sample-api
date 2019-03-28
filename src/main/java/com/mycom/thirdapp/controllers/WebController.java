@@ -20,4 +20,9 @@ public class WebController {
     public String studentDetailsTable() {
         return "studentdetailstable";
     }
+
+    @RequestMapping(value = "/attendance")
+    public String addAttendance(){
+        return "addattendance";
+    }
 }

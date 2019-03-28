@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Attendance</title>
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .hidden{display:none;}
+        .range{width: 45px;}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/attendancejs.js"></script>
+    <!--<script type="text/javascript" src="js/javasc.js"></script>-->
+</head>
+<body>
+    <pre>
+
+        Student ID : <input type="text" id="studentid"/>
+
+        <button type="button" id="search">Add/Update Attendance</button>  <button type="button" id="generate">Generate Report</button>
+
+    </pre>
+        <div id="infodiv"></div>
+    <div id="add" class="hidden" cellpadding="15px" border="1px">
+        <pre>
+            <span id="c1"></span> : <input type="number" id="course1"/>
+
+            <span id="c2"></span> : <input type="number" id="course2"/>
+
+            <span id="c3"></span> : <input type="number" id="course3"/>
+
+                    <button id="submit">submit</button>
+        </pre>
+    </div>
+
+    <div id="report" class="hidden">
+        <table id="reporttable" cellpadding="15px" border="1px">
+            <tr>
+                <th>Course Code</th>
+                <th>Course Title</th>
+                <th>Tutor Name</th>
+                <th>Attendance</th>
+            </tr>
+            <tr id="course0row">
+                <td id="cc0"></td><td id="ct0"></td><td id="tn0"></td><td id="at0"></td>
+            </tr>
+            <tr id="course1row">
+                <td id="cc1"></td><td id="ct1"></td><td id="tn1"></td><td id="at1"></td>
+            </tr>
+            <tr id="course2row">
+                <td id="cc2"></td><td id="ct2"></td><td id="tn2"></td><td id="at2"></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+
+    </script>
+</body>
+</html>
