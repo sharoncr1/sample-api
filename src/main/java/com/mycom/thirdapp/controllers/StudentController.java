@@ -28,6 +28,11 @@ public class StudentController {
       return studentService.findAll();
     }
 
+    @RequestMapping("/student/standard/{standard}")
+    public List<Student> getByStandard(@PathVariable int standard) {
+        return studentService.getBystandard(standard);
+    }
+
     @RequestMapping("/get/{studentID}")
     public Student get(@PathVariable String studentID){
         Student searchResult= studentService.find(studentID);

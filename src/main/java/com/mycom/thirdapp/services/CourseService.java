@@ -1,10 +1,7 @@
 package com.mycom.thirdapp.services;
 
 import com.mycom.thirdapp.controllers.StudentController;
-import com.mycom.thirdapp.db.models.Course;
-import com.mycom.thirdapp.db.models.CourseStandard;
-import com.mycom.thirdapp.db.models.Teacher;
-import com.mycom.thirdapp.db.models.TeachesCourse;
+import com.mycom.thirdapp.db.models.*;
 import com.mycom.thirdapp.db.repositories.CourseRepository;
 import com.mycom.thirdapp.db.repositories.CourseStandardRepository;
 import com.mycom.thirdapp.db.repositories.TeacherRepository;
@@ -33,6 +30,12 @@ public class CourseService {
     private TeachesCourseRepository teachesCourseRepository;
 
     final Logger logger= LoggerFactory.getLogger(CourseService.class);
+
+    public List<CourseStandard> getAllStandards() {
+        List<CourseStandard> standards=new ArrayList<>();
+        courseStandardRepository.findAll().forEach(standards::add);
+        return standards;
+    }
 
     public List<Course> getAllByStanadard(int standard) {
         List<Course> courses = new ArrayList<>();

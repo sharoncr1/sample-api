@@ -19,7 +19,15 @@
 <body>
     <pre>
 
-        Student ID : <input type="text" id="studentid"/>
+        Standard   : <select id="standard" class="standard">
+                        <option value="select" id="selectstandard">select</option>
+                    </select>
+
+        Student ID : <select id="stid" class="stid">
+                        <option value="select" id="selectstid">select</option>
+                    </select>
+
+        <!--Student ID : <input type="text" id="studentid"/>-->
 
         <button type="button" id="search">Add/Update Attendance</button>  <button type="button" id="generate">Generate Report</button>
 
@@ -38,7 +46,7 @@
     </div>
 
     <div id="report" class="hidden">
-        <table id="reporttable" cellpadding="15px" border="1px">
+        <table id="reporttable" cellpadding="22px" border="1px">
             <tr>
                 <th>Course Code</th>
                 <th>Course Title</th>
@@ -56,8 +64,6 @@
             </tr>
         </table>
     </div>
-    <script>
-
-    </script>
+    <div id="summarydiv"></div>
 </body>
 </html>

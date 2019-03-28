@@ -1,11 +1,14 @@
 package com.mycom.thirdapp.controllers;
 
 import com.mycom.thirdapp.db.models.Attendance;
+import com.mycom.thirdapp.db.models.CourseStandard;
 import com.mycom.thirdapp.services.AttendanceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class AttendanceController {
@@ -24,4 +27,5 @@ public class AttendanceController {
         logger.info(id);
         return attendanceService.get(id);
     }
+
 }

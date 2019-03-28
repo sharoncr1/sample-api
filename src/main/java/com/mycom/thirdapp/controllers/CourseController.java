@@ -1,6 +1,7 @@
 package com.mycom.thirdapp.controllers;
 
 import com.mycom.thirdapp.db.models.Course;
+import com.mycom.thirdapp.db.models.CourseStandard;
 import com.mycom.thirdapp.db.models.Teacher;
 import com.mycom.thirdapp.db.models.TeachesCourse;
 import com.mycom.thirdapp.services.CourseService;
@@ -37,5 +38,11 @@ public class CourseController {
     public Teacher findTeacher(@PathVariable String teacherid){
         logger.info("finding teacher with id "+ teacherid);
         return courseService.findTeacher(teacherid);
+    }
+
+    @RequestMapping("/standard/getall")
+    public List<CourseStandard> getAllStandards(){
+        logger.info("Returned number of standards"+courseService.getAllStandards().size());
+        return courseService.getAllStandards();
     }
 }

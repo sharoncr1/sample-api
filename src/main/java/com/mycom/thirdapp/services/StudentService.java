@@ -45,4 +45,10 @@ public class StudentService {
         studentDetails=studentRepository.filterByStandard(starting,ending);
         return studentDetails;
     }
+
+    public List<Student> getBystandard(int standard) {
+        List<Student> studentDetails = new ArrayList<>();
+        studentDetails=studentRepository.getByStandard(standard);
+        return studentDetails;
+    }
 }
