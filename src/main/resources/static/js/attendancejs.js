@@ -169,7 +169,6 @@ $(document).ready(function() {
                 else {
                     jsonArray.push(data);
                     fillInfo(jsonArray);
-                    $("#studentid").prop("readonly", true);
                     $("#generate").attr("disabled", true);
                     $("#search").attr("disabled", true);
                     findCourses(data['standard'],true);
@@ -183,7 +182,7 @@ $(document).ready(function() {
     });
 
     $("#submit").click(function() {
-        var id=$('#studentid').val();
+        var id= $('#stid').find(":selected").text();
         var c1=$('#course1').val();
         var c2=$('#course2').val();
         var c3=$('#course3').val();

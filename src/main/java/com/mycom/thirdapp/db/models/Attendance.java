@@ -15,13 +15,13 @@ public class Attendance {
     private String studentid;
 
     @Column(precision=5, scale=2)
-    private int course1;
+    private float course1;
 
     @Column(precision=5, scale=2)
-    private int course2;
+    private float course2;
 
     @Column(precision=5, scale=2)
-    private int course3;
+    private float course3;
 
     @Column(precision=5, scale=2)
     private float average;
@@ -33,7 +33,7 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(String studentid, int course1, int course2, int course3, int average, String eligibility) {
+    public Attendance(String studentid, float course1, float course2, float course3, float average, String eligibility) {
         this.studentid = studentid;
         this.course1 = course1;
         this.course2 = course2;
@@ -50,27 +50,27 @@ public class Attendance {
         this.studentid = studentid;
     }
 
-    public int getCourse1() {
+    public float getCourse1() {
         return course1;
     }
 
-    public void setCourse1(int course1) {
+    public void setCourse1(float course1) {
         this.course1 = course1;
     }
 
-    public int getCourse2() {
+    public float getCourse2() {
         return course2;
     }
 
-    public void setCourse2(int course2) {
+    public void setCourse2(float course2) {
         this.course2 = course2;
     }
 
-    public int getCourse3() {
+    public float getCourse3() {
         return course3;
     }
 
-    public void setCourse3(int course3) {
+    public void setCourse3(float course3) {
         this.course3 = course3;
     }
 
