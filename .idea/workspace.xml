@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d256905c-9657-4c32-b5af-79c77b85ef83" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/mycom/thirdapp/controllers/AttendanceControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycom/thirdapp/db/models/Attendance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycom/thirdapp/db/models/Attendance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycom/thirdapp/services/AttendanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycom/thirdapp/services/AttendanceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/attendancejs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/attendancejs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/mycom/thirdapp/controllers/StudentControllerTestUsingH2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/mycom/thirdapp/controllers/StudentControllerTestUsingH2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mycom/thirdapp/db/models/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycom/thirdapp/db/models/Attendance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mycom/thirdapp/services/AttendanceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycom/thirdapp/services/AttendanceService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/attendancejs.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/attendancejs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/addattendance.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/addattendance.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -379,7 +369,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554199626666" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554201273131" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -559,7 +549,7 @@
       <workItem from="1553229927105" duration="6759000" />
       <workItem from="1553249537808" duration="890000" />
       <workItem from="1553767813538" duration="8701000" />
-      <workItem from="1554185800521" duration="11646000" />
+      <workItem from="1554185800521" duration="12317000" />
     </task>
     <servers />
   </component>
@@ -596,7 +586,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72557000" />
+    <option name="totallyTimeSpent" value="73228000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="68" y="-8" width="1853" height="1089" extended-state="6" />
