@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Attendance</title>
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .hidden{display:none;}
+        .range{width: 45px;}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/attendancejs.js"></script>
+</head>
+<body>
+    <pre>
+
+        Standard   : <select id="standard" class="standard">
+                        <option value="select" id="selectstandard">select</option>
+                    </select>
+
+        Student ID : <select id="stid" class="stid">
+                        <option value="select" id="selectstid">select</option>
+                    </select>
+
+        <button type="button" id="search">Add/Update Attendance</button>  <button type="button" id="generate">Generate Report</button>
+
+    </pre>
+        <div id="infodiv"></div>
+    <div id="add" class="hidden" cellpadding="15px" border="1px">
+        <pre>
+            <span id="c1"></span> : <input type="number" id="course1"/>
+
+            <span id="c2"></span> : <input type="number" id="course2"/>
+
+            <span id="c3"></span> : <input type="number" id="course3"/>
+
+                    <button id="submit">submit</button>
+        </pre>
+    </div>
+
+    <div id="report" class="hidden">
+        <table id="reporttable" cellpadding="22px" border="1px">
+            <tr>
+                <th>Course Code</th>
+                <th>Course Title</th>
+                <th>Tutor Name</th>
+                <th>Attendance</th>
+            </tr>
+        </table>
+    </div>
+    <div id="summarydiv"></div>
+</body>
+</html>

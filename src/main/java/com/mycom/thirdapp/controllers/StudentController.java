@@ -1,12 +1,15 @@
 package com.mycom.thirdapp.controllers;
 
+import com.mycom.thirdapp.db.models.Report;
 import com.mycom.thirdapp.db.models.Student;
+import com.mycom.thirdapp.services.AttendanceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.mycom.thirdapp.services.StudentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,6 +20,9 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private AttendanceService attendanceService;
+
     @RequestMapping("/hello")
     public String welcome(){
         return "Hello World";
@@ -26,6 +32,11 @@ public class StudentController {
     public List<Student> getAll(){
         logger.info("Handling /getall end point");
       return studentService.findAll();
+    }
+
+    @RequestMapping("/student/standard/{standard}")
+    public List<Student> getByStandard(@PathVariable int standard) {
+        return studentService.getBystandard(standard);
     }
 
     @RequestMapping("/get/{studentID}")

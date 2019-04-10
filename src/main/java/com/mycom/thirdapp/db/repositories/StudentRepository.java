@@ -14,4 +14,9 @@ public interface StudentRepository extends CrudRepository<Student,String> {
             value = "SELECT * FROM student WHERE standard BETWEEN ?1 AND ?2 ORDER BY standard ASC",
             nativeQuery = true)
     List<Student> filterByStandard(int starting, int ending);
+
+    @Query(
+            value = "SELECT * FROM student WHERE standard = ?1",
+            nativeQuery = true)
+    List<Student> getByStandard(int standard);
 }
