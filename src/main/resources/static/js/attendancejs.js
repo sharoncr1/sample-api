@@ -68,7 +68,6 @@ $(document).ready(function() {
                 }
             }
         }
-
         var studentid = $('#stid').find(":selected").text();
         $.ajax({
             type: "GET",
