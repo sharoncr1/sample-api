@@ -42,7 +42,7 @@ public class CourseController {
 
     @RequestMapping("/standard/getall")
     public List<CourseStandard> getAllStandards(){
-        logger.info("Returned number of standards"+courseService.getAllStandards().size());
+        logger.info("Returned number of standards : "+courseService.getAllStandards().size());
         return courseService.getAllStandards();
     }
 }

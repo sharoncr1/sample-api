@@ -2,9 +2,7 @@ package com.mycom.thirdapp.controllers;
 
 import com.mycom.thirdapp.db.models.Attendance;
 import com.mycom.thirdapp.db.repositories.AttendanceRepository;
-import com.mycom.thirdapp.db.repositories.StudentRepository;
 import com.mycom.thirdapp.services.AttendanceService;
-import com.mycom.thirdapp.services.StudentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +57,7 @@ public class AttendanceControllerTest {
     public void eligibilityValueTest(){
         attendanceService.add(createTestAttendanceRecord());
         Attendance fromDB=attendanceService.get("testid");
-        if(TST_OBJ_average<AttendanceService.REQUIRED_AVERAGE_ATTENDACE) {
+        if(TST_OBJ_average<AttendanceService.REQUIRED_AVERAGE_ATTENDANCE) {
             assert (fromDB.getEligibility().equals("Not Eligible"));
         }
         else{

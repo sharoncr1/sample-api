@@ -1,0 +1,1 @@
+alter table attendance add creation_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP

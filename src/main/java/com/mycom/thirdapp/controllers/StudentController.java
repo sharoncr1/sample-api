@@ -69,7 +69,7 @@ public class StudentController {
     @RequestMapping(method = RequestMethod.GET,value = "/get/student/{start}/{end}")
     public List<Student> filterByStandard(@PathVariable int start, @PathVariable int end){
         List<Student> filteredResult= studentService.filterByStandard(start,end);
-        logger.info("Number of records Returned to the ui :\n"+filteredResult.size());
+        logger.info("Number of records Returned to the ui : "+filteredResult.size());
         return filteredResult;
     }
 

@@ -34,7 +34,7 @@ public class AttendanceController {
     @RequestMapping("/attendance/generatereport/{studentid}")
     public List<Report> generateReport(@PathVariable String studentid) {
         List<Report> reportList = new ArrayList<>();
-        reportList = attendanceService.generateReport(studentid);
+        reportList = attendanceService.generateReport(studentid,false);
         reportList.forEach(report -> {
             logger.info("Fetched courseid :" + report.getCourseid());
             logger.info("Fetched coursetitle :" + report.getCoursetitle());

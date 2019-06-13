@@ -1,15 +1,19 @@
 package com.mycom.thirdapp.db.models;
 
 
+//import org.springframework.data.redis.core.RedisHash;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Attendance")
-public class Attendance {
+//@RedisHash("Attendance")
+public class Attendance implements Serializable {
 
     @Id
     private String studentid;
