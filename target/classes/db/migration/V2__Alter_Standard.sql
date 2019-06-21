@@ -1,1 +1,0 @@
-ALTER TABLE student modify column standard int(2) not null;

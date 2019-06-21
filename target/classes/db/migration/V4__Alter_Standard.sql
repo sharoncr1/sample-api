@@ -1,1 +1,0 @@
---ALTER TABLE teacher modify column standard int(2) not null;
