@@ -1,4 +1,13 @@
+import org.apache.http.HttpHeaders;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.apache.http.entity.StringEntity;
+
 node {
+        def endpoint = "http://localhost:8080/health"
         def mvnHome
         stage('Preparation') { // for display purposes
                 // Get some code from a GitHub repository
@@ -32,14 +41,24 @@ node {
                 sh 'git branch'
                 sh 'echo "starting to build"'
                 sh 'mvn -Dmaven.test.skip=true package'
-
         }
 
         stage('Creating Docker Image') {
                 sh 'sudo mvn install dockerfile:build'
         }
+
         stage('Deploy') {
                 sh 'sudo docker run --rm --network host springio/thirdproject &'
+        }
+
+        stage('Verify Deployment'){
+                def get = new URL(endpoint).openConnection();
+                println(get.getContent());
+                println(get.toString());
+                println(get);
+                if(get.getResponseCode().equals("200")) {
+                        println(get.getInputStream().getText());
+                }
         }
 
         stage('Results') {
