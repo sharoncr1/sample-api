@@ -1,49 +1,43 @@
 package com.mycom.thirdapp.services;
 
 import com.mycom.thirdapp.db.models.ReportModel;
+import org.springframework.boot.test.context.TestComponent;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class ReportParser {
 
-    public List<ReportModel> processFiles(File error, File exception) throws IOException {
+    public List<ReportModel> processFiles(File error, File exception, File template, String date) throws IOException {
         List<ReportModel> errors = readCSV(error, true);
         List<ReportModel> exceptions = readCSV(exception, false);
-        return combine(errors, exceptions);
+        List<ReportModel> finalReport = readCSV(template, date);
+        finalReport = combine(finalReport, errors, true);
+        finalReport = combine(finalReport, exceptions, false);
+        preview(finalReport);
+        return finalReport;
     }
 
-    private List<ReportModel> combine(List<ReportModel> errors, List<ReportModel> exceptions) {
-        List<ReportModel> report;
-        List<ReportModel> compare;
-        if(errors.size()>exceptions.size()){
-           report = new ArrayList<>(errors);
-           compare = new ArrayList<>(exceptions);
-        }
-        else{
-            report = new ArrayList<>(exceptions);
-            compare = new ArrayList<>(errors);
-        }
-
-        List<ReportModel> toBeRemoved = new ArrayList<>();
-        for ( ReportModel reportRow : report) {
-            for ( ReportModel compareRow : compare) {
-                if(reportRow.date.equalsIgnoreCase(compareRow.date) &&
-                    reportRow.service.equalsIgnoreCase(compareRow.service)){
-                    if(reportRow.errorCount.equalsIgnoreCase("0"))
-                        reportRow.errorCount = compareRow.errorCount;
-                    if(reportRow.exceptionCount.equalsIgnoreCase("0"))
-                        reportRow.exceptionCount = compareRow.exceptionCount;
-                    toBeRemoved.add(compareRow);
+    private List<ReportModel> combine(List<ReportModel> report, List<ReportModel> watcherCount, boolean isError) {
+        for ( ReportModel countRow : watcherCount ) {
+            for ( ReportModel reportRow : report ) {
+                if(countRow.isEqual(reportRow)){
+                    if(isError){
+                        reportRow.errorCount = countRow.errorCount;
+                    }
+                    else {
+                        reportRow.exceptionCount = countRow.exceptionCount;
+                    }
                 }
             }
         }
-        compare.removeAll(toBeRemoved);
-        report.addAll(compare);
-        preview(report);
         return report;
     }
 
@@ -61,13 +55,9 @@ public class ReportParser {
         String line = br.readLine(); // Reading header, Ignoring
 
         while ((line = br.readLine()) != null && !line.isEmpty()) {
+            line = line.replaceAll("\"", "");
             String[] fields = line.split(",");
-            fields[1] = fields[1].replaceAll("hsbc-prod-", "");
-            fields[1] = fields[1].replaceAll("hsbc-prod", "");
             String serviceName =  (fields[1] +"-"+ fields[2]);
-            if(serviceName.charAt(0)=='-'){
-                serviceName = serviceName.replace("-","");
-            }
             if(isError)
                 rows.add(new ReportModel(fields[0], serviceName, fields[3],"0"));
             else
@@ -76,4 +66,43 @@ public class ReportParser {
         br.close();
         return rows;
     }
+
+    public List<ReportModel> readCSV(File file, String date) throws IOException {
+        List<ReportModel> rows = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        String line = br.readLine(); // Reading header, Ignoring
+
+        while ((line = br.readLine()) != null && !line.isEmpty()) {
+            line = line.replaceAll("\"", "");
+            line = line.replaceAll("day1", date);
+            line = line.replaceAll("day2", setDate(date, 1));
+            line = line.replaceAll("day3", setDate(date, 2));
+            line = line.replaceAll("day4", setDate(date, 3));
+            line = line.replaceAll("day5", setDate(date, 4));
+            line = line.replaceAll("day6", setDate(date, 5));
+            line = line.replaceAll("day7", setDate(date, 6));
+
+            String[] fields = line.split(",");
+            String serviceName =  (fields[1] +"-"+ fields[2]);
+            rows.add(new ReportModel(fields[0], serviceName, "0","0"));
+        }
+        br.close();
+        return rows;
+    }
+
+    public String setDate(String date,int offsetInDays){
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(simpleDateFormat.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        calendar.add(Calendar.DATE, offsetInDays);
+
+        return simpleDateFormat.format(calendar.getTime());
+    }
+
 }

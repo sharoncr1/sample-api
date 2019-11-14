@@ -2,11 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<h1>Spring Boot file upload example</h1>
+<h1></h1>
 
 <form method="POST" action="/upload" enctype="multipart/form-data">
-    <input type="file" name="file1" /><br/><br/>
-    <input type="file" name="file2" /><br/><br/>
+    Error count : <input type="file" name="file1" /><br/><br/>
+    Exception Count : <input type="file" name="file2" /><br/><br/>
+<!--    Report template : <input type="file" name="file3" /><br/><br/>-->
+    Start date : <input type="text" name = "date"/><br/><br/>
     <input type="submit" value="Submit" />
 </form>
 

@@ -5,6 +5,8 @@ import com.mycom.thirdapp.db.models.ReportModel;
 import com.mycom.thirdapp.services.ReportParser;
 import com.opencsv.CSVWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.math.BigInteger;
 import java.util.List;
 
 @Controller
@@ -32,14 +33,48 @@ public class UploadController {
     @PostMapping("/upload") // //new annotation since 4.3
     public String singleFileUpload(@RequestParam("file1") MultipartFile errorFile,
                                    @RequestParam("file2") MultipartFile exceptionFile,
+//                                   @RequestParam("file3") MultipartFile reportFile,
+                                   @RequestParam("date") String date,
+                                   HttpServletResponse response,
                                    RedirectAttributes redirectAttributes) throws IOException {
         if (errorFile.isEmpty() || exceptionFile.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
             return "redirect:uploadStatus";
         }
 
-        List<ReportModel> result = reportParser.processFiles(convert(errorFile), convert(exceptionFile));
+        Resource resource = new ClassPathResource("template.csv");
+
+        InputStream input = resource.getInputStream();
+
+        File template = resource.getFile();
+
+        List<ReportModel> result = reportParser.processFiles(convert(errorFile), convert(exceptionFile), template, date);
         saveFile(result);
+
+        String csvFileName = "TransferNoticeReport.csv";
+        response.setContentType("text/csv");
+        response.setCharacterEncoding("UTF-8");
+
+        String headerKey = "Content-Disposition";
+
+        String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
+
+        response.setHeader(headerKey, headerValue);
+        BigInteger totalRows = BigInteger.ZERO;
+
+        CSVWriter csvWriter = new CSVWriter(response.getWriter(),
+                CSVWriter.DEFAULT_SEPARATOR,
+                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                CSVWriter.DEFAULT_LINE_END);
+
+        csvWriter.writeNext(new String[]{"Date", "Service", "Error", "Exception", "Total"});
+
+        response.getWriter().flush();// Flushing the headers, so that download starts at the instant.
+
+        for (ReportModel row : result)
+            csvWriter.writeNext(row.toStringArray());
+        csvWriter.close();
+
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded '" + errorFile.getOriginalFilename() + "'");
 
